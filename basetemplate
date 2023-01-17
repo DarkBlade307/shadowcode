@@ -1,0 +1,7 @@
+import shadowgame
+shadowgame.SetWindow(700, 500, "Hello World!")
+while True:
+    if shadowgame.Game() == False:
+        break
+    else:
+        pass # The juicy non-base-template code goes here
