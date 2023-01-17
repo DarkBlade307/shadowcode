@@ -1,0 +1,2 @@
+# shadowcode
+Pygame made easy
