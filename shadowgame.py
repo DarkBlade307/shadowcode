@@ -81,6 +81,28 @@ class Shape: # Basic shape class for the basic shapes that pygame can draw out o
         elif self.Type == "ellipse":
             pygame.draw.ellipse(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height))
 
+class Hitbox: # Basic hitbox that allows you to get collision info
+    def __init__(self, posX, posY, width, height, colour, name):
+        self.PosX = posX # The X position of the shape on the screen
+        self.PosY = posY # The Y position of the shape on the screen
+        self.Color = colour # The colour of the shape
+        self.Width = width # The width of the shape
+        self.Height = height # The height of the shape
+        self.Type = type # The type of shape (rect, elipse, etc)
+        self.Name = name # The name of the object
+        self.whole = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height), 1)
+        self.left = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width - (self.Width - 1), self.Height))
+        self.right = pygame.draw.rect(screen, self.Color, (self.PosX + (self.Width - 1), self.PosY, self.Width - (self.Width - 1), self.Height))
+        self.up = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height - (self.Height - 1)))
+        self.down = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY + (self.Height - 1), self.Width - (self.Width - 1), self.Height - (self.Height - 1)))
+    def Paint(self): # Built in function to paint the object
+        global whole, left, right, up, down
+        self.whole = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height), 1)
+        self.left = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width - (self.Width - 1), self.Height))
+        self.right = pygame.draw.rect(screen, self.Color, (self.PosX + (self.Width - 1), self.PosY, self.Width - (self.Width - 1), self.Height))
+        self.up = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height - (self.Height - 1)))
+        self.down = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY + (self.Height - 1), self.Width - (self.Width - 1), self.Height - (self.Height - 1)))
+
 def Game():
     global clock
     for event in pygame.event.get():
