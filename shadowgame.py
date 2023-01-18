@@ -22,6 +22,7 @@ def SetFPS(FPS):
     fps = FPS
 
 Painter = [] # List of objects to be painted by the Paint() function
+PreFillPainter = [] # List of objects that get painted  BEFORE the screen gets filled (useful for hitboxes)
 ColorFill = RED # The default colour that fills the screen at the beginning of the Paint() function
 ScreenFillMode = "Solid"
 
@@ -39,6 +40,8 @@ def SetBgImg(IMG):
 
 # Draws objects on the screen
 def Paint():
+    for i in PreFillPainter:
+        i.Paint()
     if ScreenFillMode == "Solid":
         screen.fill(ColorFill)
     elif ScreenFillMode == "Image":
