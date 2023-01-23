@@ -1,7 +1,7 @@
 import shadowgame
 import customs
 shadowgame.SetWindow(700, 500, "Hello World!")
-Player = customs.Sprite(['1.png', '2.png', '3.png'], (70, 70))
+Player = shadowgame.Sprite(['1.png', '2.png', '3.png'], (70, 70))
 PlayerBox = shadowgame.Hitbox(Player.PosX, Player.PosY, 16, 16, shadowgame.RED, "PlayerHitbox")
 while True:
     if shadowgame.Game() == False:

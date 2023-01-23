@@ -13,6 +13,8 @@ def SetWindow(width, height, text):
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption(str(text))
 
+SetWindow(700, 500, "HelloWorld!!")
+
 fps = 60 # Default FPS in case FPS doesn't get set
 clock = pygame.time.Clock() #Create the clock
 
@@ -23,7 +25,7 @@ def SetFPS(FPS):
 
 Painter = [] # List of objects to be painted by the Paint() function
 PreFillPainter = [] # List of objects that get painted  BEFORE the screen gets filled (useful for hitboxes)
-ColorFill = RED # The default colour that fills the screen at the beginning of the Paint() function
+ColorFill = BLACK # The default colour that fills the screen at the beginning of the Paint() function
 ScreenFillMode = "Solid"
 
 def SetFillColor(color):
@@ -50,10 +52,6 @@ def Paint():
         i.Paint()
     pygame.display.flip()
     Painter.clear()
-
-# Processes physics
-def Physics():
-    pass
 
 def GetKeys(checking):
     pressed = pygame.key.get_pressed()
@@ -106,11 +104,21 @@ class Hitbox: # Basic hitbox that allows you to get collision info
         self.up = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY, self.Width, self.Height - (self.Height - 1)))
         self.down = pygame.draw.rect(screen, self.Color, (self.PosX, self.PosY + (self.Height - 1), self.Width - (self.Width - 1), self.Height - (self.Height - 1)))
 
+class Sprite: # Sprite class that supports animations
+    def __init__(self, img, position):
+        self.Images = []
+        self.ImageNo = 0
+        self.PosX = position[0]
+        self.PosY = position[1]
+        for i in img:
+            self.Images.append(pygame.image.load(i))
+    def Paint(self):
+        screen.blit(self.Images[self.ImageNo], (self.PosX, self.PosY))
+
 def Game():
     global clock
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False
-    Physics()
     Paint()
     clock.tick(fps)
